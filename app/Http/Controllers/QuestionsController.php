@@ -15,7 +15,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions =Question::join('categories', 'questions.category', '=', 'categories.id')->get();
+        $questions =Question::join('categories', 'questions.category', '=', 'categories.id')->select('questions.*', 'name')->get();
         // dd($questions);
         // $categories=Category::pluck('name','id');
         return view('Questions.question_list', compact('questions' , ));
@@ -46,7 +46,8 @@ class QuestionsController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        $category=Category::find($question->category)->name;
+        return view('Questions.view_question',compact('question','category'));
     }
 
     /**
@@ -54,15 +55,22 @@ class QuestionsController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        $categories=Category::all();
+        $category=Category::find($question->category)->name;
+        return view('Questions.edit_question',compact('question','category','categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Question $question)
+    public function update(QuestionAddRequest $request, Question $question)
     {
-        //
+        $question->question=$request->question;
+        $question->category=$request->category;
+        $path=$request->file('image')->store('images');
+        $question->image=$path;
+        $question->save();
+        return redirect('questions');
     }
 
     /**
@@ -70,6 +78,7 @@ class QuestionsController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+        return redirect('questions');
     }
 }
