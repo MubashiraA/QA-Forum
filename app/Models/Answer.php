@@ -9,5 +9,5 @@ class Answer extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['answer_id','answer','image'];
+    protected $fillable = ['answer_id','answers','image'];
 }

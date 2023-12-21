@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('answer_id');
             $table->string('answers',100);
-            $table->string('files',255)->nullable();
+            $table->string('image',255)->nullable();
             $table->foreign('answer_id')->references('id')->on('questions');
             $table->timestamps();
         });

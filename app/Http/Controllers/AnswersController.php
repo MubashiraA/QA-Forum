@@ -4,40 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AnswerAddRequest;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
 class AnswersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function postAnswer(Request $request)
     {
-        //
+        $questions = Question::find($request->id);
+        return view('Answers.add_answer', compact('questions'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(AnswerAddRequest $request)
     {
-        //
+        if ($request->file('image') == null) {
+            $path = "";
+        }else{
+            $path = $request->file('image')->store('images'); 
+        }
+        $data = array_merge($request->except('image'), ['image' => $path], ['answer_id' => $request->id]);
+        Answer::create($data);
+        return redirect('questions');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Answer $answer)
-    {
+        $answers =Answer::where('answer_id','=',$request->id)->get();
+        $questions = Question::find($request->id);
+        return view('Answers.view_answers', compact('questions','answers'));
     }
 
     /**
@@ -45,8 +40,6 @@ class AnswersController extends Controller
      */
     public function edit(Answer $answer)
     {
-        $questions=Question::all();
-        return view('Answers.add_answer',compact('answer','questions'));
     }
 
     /**

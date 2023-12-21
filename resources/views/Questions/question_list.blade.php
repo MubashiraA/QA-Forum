@@ -41,8 +41,8 @@
                     <button>Delete</button>
                 </form>
             </td>
-            <td><a href="/answers/{{$question->id}}/edit"><button>Add Answers</button></a></td>
-
+            <td><a href="/post-answer/{{$question->id}}"><button>Add Answers</button></a></td>
+            <td><a href="/view-answer/{{$question->id}}"><button>View Answers</button></a></td>
         </tr>
         @endforeach
     </table>
