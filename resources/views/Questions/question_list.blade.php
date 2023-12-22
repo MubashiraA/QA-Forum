@@ -8,8 +8,8 @@
 </head>
 
 <body>
-<a href="/login/create">Registration</a><br>
-<a href="/questions/create">Question</a><br><br>
+<!-- <a href="/login/create">Registration</a><br> -->
+<a href="/questions/create">Add Question</a><br><br>
     <table>
         <tr>
             <th>Id</th>

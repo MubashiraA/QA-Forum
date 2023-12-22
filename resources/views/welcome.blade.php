@@ -18,11 +18,13 @@
                     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                         <div class="card shadow-2-strong" style="border-radius: 1rem;">
                             <div class="card-body p-5 text-center">
+                            <h4 style="text-align: right;"><a href="/login/create">Registration</a><br></h4>
+
 
                                 <h3 class="mb-5">Sign in</h3>
 
                                 <div class="form-outline mb-4">
-                                    <input type="email" name="email" id="typeEmailX-2" class="form-control form-control-lg" value="{{old('email')}}" />
+                                    <input type="email" name="email" id="typeEmailX-2" class="form-control form-control-lg" value="{{old('email')}}" style="text-align: center;"/>
                                     <label class="form-label" for="typeEmailX-2">Email</label>
                                     @error('email')
                                     <span class="text-danger">{{ $message }}</span>
